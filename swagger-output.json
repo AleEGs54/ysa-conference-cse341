@@ -9,6 +9,11 @@
     {
       "url": "http://localhost:3000",
       "description": "Local development server"
+    },
+    {
+      "url": "ysa-conference-cse341.onrender.com",
+      "description": "Production server"
+    
     }
   ],
   "paths": {
