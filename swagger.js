@@ -12,6 +12,10 @@ const doc = {
     },
     servers: [
         {
+            url: 'https://ysa-conference-cse341.onrender.com',
+            description: 'Production server',
+        },
+        {
             url: 'http://localhost:3000',
             description: 'Local development server',
         },
