@@ -1,0 +1,484 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Participants API",
+    "description": "API to know how to make requests to the DB",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/participants/": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Participants"
+        ],
+        "summary": "Create a new Participant",
+        "description": "Insert a new participant into the database. ",
+        "responses": {
+          "201": {
+            "description": "Participant created successfully."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Participant"
+              },
+              "examples": {
+                "ParticipantExample": {
+                  "value": {
+                    "firstName": "Jane",
+                    "lastName": "Doe",
+                    "preferedName": "Janey",
+                    "dob": "1995-03-15",
+                    "gender": "Female",
+                    "phone": "1112223333",
+                    "email": "jane.doe@example.com",
+                    "age": 28,
+                    "shirtSize": "M",
+                    "ldsMember": true,
+                    "stake": "Riverton",
+                    "ward": "North Creek",
+                    "bloodType": "A+",
+                    "allergies": "None",
+                    "medicalTreatment": "None",
+                    "conditions": {
+                      "diabetic": false,
+                      "asthmatic": false
+                    },
+                    "insurance": "Blue Cross",
+                    "covidDoses": 2,
+                    "emergencyContact": {
+                      "firstName": "David",
+                      "lastName": "Doe",
+                      "email": "david.doe@example.com",
+                      "phone": "4445556666"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/participants/{id}": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Participant": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Joe"
+                  }
+                }
+              },
+              "lastName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Doe"
+                  }
+                }
+              },
+              "preferedName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Joe"
+                  }
+                }
+              },
+              "dob": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "date"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "1990-01-01"
+                  }
+                }
+              },
+              "gender": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Male"
+                  }
+                }
+              },
+              "phone": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "987654321"
+                  }
+                }
+              },
+              "email": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "email"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "joe@email.com"
+                  }
+                }
+              },
+              "age": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "integer"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 23
+                  }
+                }
+              },
+              "shirtSize": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "L"
+                  }
+                }
+              },
+              "ldsMember": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "boolean"
+                  },
+                  "example": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              },
+              "stake": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Draper"
+                  }
+                }
+              },
+              "ward": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "South Mountain"
+                  }
+                }
+              },
+              "bloodType": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "O+"
+                  }
+                }
+              },
+              "allergies": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Explain.../No"
+                  }
+                }
+              },
+              "medicalTreatment": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Explain.../No"
+                  }
+                }
+              },
+              "conditions": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "object"
+                  },
+                  "properties": {
+                    "type": "object",
+                    "properties": {
+                      "diabetic": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "example": "boolean"
+                          },
+                          "example": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      },
+                      "asthmatic": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "example": "boolean"
+                          },
+                          "example": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "insurance": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "example": {
+                    "type": "string",
+                    "example": "Name of the insurance..."
+                  }
+                }
+              },
+              "covidDoses": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "integer"
+                  },
+                  "example": {
+                    "type": "number",
+                    "example": 3
+                  }
+                }
+              },
+              "emergencyContact": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "object"
+                  },
+                  "properties": {
+                    "type": "object",
+                    "properties": {
+                      "firstName": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "example": {
+                            "type": "string",
+                            "example": "John"
+                          }
+                        }
+                      },
+                      "lastName": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "example": {
+                            "type": "string",
+                            "example": "Doe"
+                          }
+                        }
+                      },
+                      "email": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "format": {
+                            "type": "string",
+                            "example": "email"
+                          },
+                          "example": {
+                            "type": "string",
+                            "example": "john@email.com"
+                          }
+                        }
+                      },
+                      "phone": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "example": "string"
+                          },
+                          "example": {
+                            "type": "string",
+                            "example": "123456789"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": {
+            "type": "array",
+            "example": [
+              "firstName",
+              "lastName",
+              "email",
+              "dob",
+              "gender"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
