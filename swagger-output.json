@@ -21,10 +21,14 @@
         "tags": [
           "Participants"
         ],
+        "summary": "Returns a list of all the participants.",
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -39,54 +43,14 @@
         "description": "Insert a new participant into the database. ",
         "responses": {
           "201": {
-            "description": "Participant created successfully."
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
           }
         },
         "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Participant"
-              },
-              "examples": {
-                "ParticipantExample": {
-                  "value": {
-                    "firstName": "Jane",
-                    "lastName": "Doe",
-                    "preferedName": "Janey",
-                    "dob": "1995-03-15",
-                    "gender": "Female",
-                    "phone": "1112223333",
-                    "email": "jane.doe@example.com",
-                    "age": 28,
-                    "shirtSize": "M",
-                    "ldsMember": true,
-                    "stake": "Riverton",
-                    "ward": "North Creek",
-                    "bloodType": "A+",
-                    "allergies": "None",
-                    "medicalTreatment": "None",
-                    "conditions": {
-                      "diabetic": false,
-                      "asthmatic": false
-                    },
-                    "insurance": "Blue Cross",
-                    "covidDoses": 2,
-                    "emergencyContact": {
-                      "firstName": "David",
-                      "lastName": "Doe",
-                      "email": "david.doe@example.com",
-                      "phone": "4445556666"
-                    }
-                  }
-                }
-              }
-            }
-          }
+          "$ref": "#/components/requestBodies/ParticipantBody"
         }
       }
     },
@@ -95,6 +59,7 @@
         "tags": [
           "Participants"
         ],
+        "summary": "Returns a single participant",
         "description": "",
         "parameters": [
           {
@@ -107,6 +72,64 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Participants"
+        ],
+        "summary": "Update a Participant",
+        "description": "Replaces an existing participant in the database. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ParticipantBody"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Participants"
+        ],
+        "summary": "Delete a Participant",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -133,10 +156,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Joe"
                   }
                 }
               },
@@ -146,10 +165,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Doe"
                   }
                 }
               },
@@ -159,10 +174,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Joe"
                   }
                 }
               },
@@ -205,7 +216,7 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "987654321"
+                    "example": "123456789"
                   }
                 }
               },
@@ -219,10 +230,6 @@
                   "format": {
                     "type": "string",
                     "example": "email"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "joe@email.com"
                   }
                 }
               },
@@ -232,10 +239,6 @@
                   "type": {
                     "type": "string",
                     "example": "integer"
-                  },
-                  "example": {
-                    "type": "number",
-                    "example": 23
                   }
                 }
               },
@@ -248,7 +251,7 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "L"
+                    "example": "M"
                   }
                 }
               },
@@ -261,7 +264,7 @@
                   },
                   "example": {
                     "type": "boolean",
-                    "example": true
+                    "example": false
                   }
                 }
               },
@@ -271,10 +274,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Draper"
                   }
                 }
               },
@@ -284,10 +283,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "South Mountain"
                   }
                 }
               },
@@ -300,7 +295,7 @@
                   },
                   "example": {
                     "type": "string",
-                    "example": "O+"
+                    "example": "A+"
                   }
                 }
               },
@@ -376,10 +371,6 @@
                   "type": {
                     "type": "string",
                     "example": "string"
-                  },
-                  "example": {
-                    "type": "string",
-                    "example": "Name of the insurance..."
                   }
                 }
               },
@@ -392,7 +383,7 @@
                   },
                   "example": {
                     "type": "number",
-                    "example": 3
+                    "example": 0
                   }
                 }
               },
@@ -412,10 +403,6 @@
                           "type": {
                             "type": "string",
                             "example": "string"
-                          },
-                          "example": {
-                            "type": "string",
-                            "example": "John"
                           }
                         }
                       },
@@ -425,10 +412,6 @@
                           "type": {
                             "type": "string",
                             "example": "string"
-                          },
-                          "example": {
-                            "type": "string",
-                            "example": "Doe"
                           }
                         }
                       },
@@ -442,10 +425,6 @@
                           "format": {
                             "type": "string",
                             "example": "email"
-                          },
-                          "example": {
-                            "type": "string",
-                            "example": "john@email.com"
                           }
                         }
                       },
@@ -479,6 +458,51 @@
             ],
             "items": {
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "ParticipantBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Participant"
+            },
+            "examples": {
+              "Participant": {
+                "value": {
+                  "firstName": "any",
+                  "lastName": "any",
+                  "preferedName": "any",
+                  "dob": "any",
+                  "gender": "any",
+                  "phone": "any",
+                  "email": "any",
+                  "age": 20,
+                  "shirtSize": "any",
+                  "ldsMember": false,
+                  "stake": "any",
+                  "ward": "any",
+                  "bloodType": "any",
+                  "allergies": "any",
+                  "medicalTreatment": "any",
+                  "conditions": {
+                    "diabetic": false,
+                    "asthmatic": false
+                  },
+                  "insurance": "any",
+                  "covidDoses": 2,
+                  "emergencyContact": {
+                    "firstName": "any",
+                    "lastName": "any",
+                    "email": "any",
+                    "phone": "any"
+                  }
+                }
+              }
             }
           }
         }
