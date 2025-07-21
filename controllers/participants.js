@@ -87,6 +87,7 @@ controller.updateParticipant = async (req, res) => {
 
         if (updatedParticipant.modifiedCount > 0) {
             res.status(204).json(updatedParticipant);
+            return;
         }
 
         res.status(404).json({

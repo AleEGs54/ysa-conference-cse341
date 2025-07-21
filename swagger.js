@@ -76,6 +76,19 @@ const doc = {
                 },
                 required: ['firstName', 'lastName', 'email', 'dob', 'gender'],
             },
+            User: {
+                type: 'object',
+                properties: {
+                    username: { type: 'string', minLength: 5 },
+                    password: { type: 'string', minLength: 5 },
+                    email: { type: 'string', format: 'email' },
+                    role: {
+                        type: 'string',
+                        enum: ['admin', 'staff', 'employee'],
+                    },
+                },
+                required: ['username', 'password', 'email', 'role'],
+            },
         },
         requestBodies: {
             ParticipantBody: {
@@ -115,6 +128,26 @@ const doc = {
                                         email: 'any',
                                         phone: 'any',
                                     },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            UserBody: {
+                required: true,
+                content: {
+                    'application/json': {
+                        schema: {
+                            $ref: '#/components/schemas/User',
+                        },
+                        examples: {
+                            User: {
+                                value: {
+                                    username: 'JohnDoe',
+                                    password: 'Example@123',
+                                    email: 'johndoe@example.com',
+                                    role: 'staff',
                                 },
                             },
                         },

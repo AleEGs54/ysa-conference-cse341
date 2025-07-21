@@ -1,7 +1,4 @@
 const express = require('express');
-//Like a wrapper for middlewares,
-// but automatically sends the error to the error middleware
-//require('express-async-errors');
 const app = express();
 const cors = require('cors');
 const { connectDb } = require('./db/connection');

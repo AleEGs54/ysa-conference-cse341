@@ -7,8 +7,7 @@ const emergencyContactSchema = Joi.object({
     phone: Joi.string()
         .pattern(/^\+?[0-9\s\-()]{7,15}$/)
         .messages({
-            'string.pattern.base':
-                "Emergency contact's phone number is invalid",
+            'string.base': "Emergency contact's phone number is invalid",
         }),
 });
 
@@ -21,14 +20,14 @@ const participantSchema = Joi.object({
         .pattern(/^\d{4}-\d{2}-\d{2}$/)
         .required()
         .messages({
-            'string.pattern.base': 'Date of birth must be in YYYY-MM-DD format',
+            'string.base': 'Date of birth must be in YYYY-MM-DD format',
         }),
 
     gender: Joi.string().valid('Male', 'Female', 'Other').required(),
 
     phone: Joi.string()
         .pattern(/^\+?[0-9\s\-()]{7,15}$/)
-        .messages({ 'string.pattern.base': 'Phone number is invalid' }),
+        .messages({ 'string.base': 'Phone number is invalid' }),
 
     email: Joi.string().email().trim().lowercase().required(),
 
