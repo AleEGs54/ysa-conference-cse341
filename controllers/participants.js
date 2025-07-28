@@ -60,6 +60,7 @@ controller.createParticipant = async (req, res) => {
     // #swagger.summary = 'Create a new Participant'
     // #swagger.description = 'Insert a new participant into the database. '
     // #swagger.requestBody = { $ref: '#/components/requestBodies/ParticipantBody' }
+    // #swagger.security = [{"OAuth2": ["write"]}]
 
     try {
         const createdParticipant = await Participant.create(req.body);
@@ -79,6 +80,7 @@ controller.updateParticipant = async (req, res) => {
     // #swagger.summary = 'Update a Participant'
     // #swagger.description = 'Replaces an existing participant in the database. '
     // #swagger.requestBody = { $ref: '#/components/requestBodies/ParticipantBody' }
+    // #swagger.security = [{"OAuth2": ["write"]}]
     try {
         const updatedParticipant = await Participant.replaceOne(
             { _id: req.params.id },
@@ -107,7 +109,7 @@ controller.updateParticipant = async (req, res) => {
 controller.deleteParticipant = async (req, res) => {
     // #swagger.tags = ['Participants']
     // #swagger.summary = 'Delete a Participant'
-
+    // #swagger.security = [{"OAuth2": ["delete"]}]
     try {
         const deletedParticipant = await Participant.deleteOne({
             _id: req.params.id,

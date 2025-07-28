@@ -1,5 +1,4 @@
 {
-
   "openapi": "3.0.0",
   "info": {
     "title": "Participants API",
@@ -46,10 +45,20 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "OAuth2": [
+              "write"
+            ]
+          }
+        ],
         "requestBody": {
           "$ref": "#/components/requestBodies/ParticipantBody"
         }
@@ -100,6 +109,9 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -107,6 +119,13 @@
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "OAuth2": [
+              "write"
+            ]
+          }
+        ],
         "requestBody": {
           "$ref": "#/components/requestBodies/ParticipantBody"
         }
@@ -129,13 +148,23 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "delete"
+            ]
+          }
+        ]
       }
     },
     "/users/": {
@@ -167,10 +196,20 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "OAuth2": [
+              "write"
+            ]
+          }
+        ],
         "requestBody": {
           "$ref": "#/components/requestBodies/UserBody"
         }
@@ -221,6 +260,9 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -228,6 +270,13 @@
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "OAuth2": [
+              "write"
+            ]
+          }
+        ],
         "requestBody": {
           "$ref": "#/components/requestBodies/UserBody"
         }
@@ -250,13 +299,23 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "delete"
+            ]
+          }
+        ]
       }
     }
   },
@@ -594,6 +653,28 @@
           "properties": {
             "type": "object",
             "properties": {
+              "githubId": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "minLength": {
+                    "type": "number",
+                    "example": 2
+                  }
+                }
+              },
               "username": {
                 "type": "object",
                 "properties": {
@@ -650,6 +731,10 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "default": {
+                    "type": "string",
+                    "example": "employee"
                   }
                 }
               }
@@ -658,13 +743,27 @@
           "required": {
             "type": "array",
             "example": [
+              "name",
               "username",
-              "password",
-              "email",
               "role"
             ],
             "items": {
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://github.com/login/oauth/authorize",
+            "tokenUrl": "https://github.com/login/oauth/access_token",
+            "scopes": {
+              "write": "Allowed to create or modify data",
+              "delete": "Allowed to delete data"
             }
           }
         }
@@ -724,10 +823,12 @@
             "examples": {
               "User": {
                 "value": {
+                  "githubId": "any",
+                  "name": "any",
                   "username": "JohnDoe",
                   "password": "Example@123",
                   "email": "johndoe@example.com",
-                  "role": "staff"
+                  "role": "employee"
                 }
               }
             }

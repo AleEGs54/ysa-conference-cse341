@@ -54,6 +54,7 @@ controller.createUser = async (req, res) => {
     // #swagger.summary = 'Create a new User'
     // #swagger.description = 'Insert a new User into the database. '
     // #swagger.requestBody = { $ref: '#/components/requestBodies/UserBody' }
+    // #swagger.security = [{"OAuth2": ["write"]}]
 
     try {
         const createdUser = await User.create(req.body);
@@ -73,6 +74,7 @@ controller.updateUser = async (req, res) => {
     // #swagger.summary = 'Update a User'
     // #swagger.description = 'Replaces an existing User in the database. '
     // #swagger.requestBody = { $ref: '#/components/requestBodies/UserBody' }
+    // #swagger.security = [{"OAuth2": ["write"]}]
     try {
         const updatedUser = await User.replaceOne(
             { _id: req.params.id },
@@ -101,6 +103,7 @@ controller.updateUser = async (req, res) => {
 controller.deleteUser = async (req, res) => {
     // #swagger.tags = ['Users']
     // #swagger.summary = 'Delete a User'
+    // #swagger.security = [{"OAuth2": ["delete"]}]
 
     try {
         const deletedUser = await User.deleteOne({

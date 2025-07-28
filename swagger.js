@@ -79,15 +79,34 @@ const doc = {
             User: {
                 type: 'object',
                 properties: {
+                    githubId: { type: 'string' },
+                    name: { type: 'string', minLength: 2 },
                     username: { type: 'string', minLength: 5 },
                     password: { type: 'string', minLength: 5 },
                     email: { type: 'string', format: 'email' },
                     role: {
                         type: 'string',
                         enum: ['admin', 'staff', 'employee'],
+                        default: 'employee',
                     },
                 },
-                required: ['username', 'password', 'email', 'role'],
+                required: ['name', 'username', 'role'],
+            },
+        },
+        securitySchemes: {
+            OAuth2: {
+                type: 'oauth2',
+                flows: {
+                    authorizationCode: {
+                        authorizationUrl:
+                            'https://github.com/login/oauth/authorize',
+                        tokenUrl: 'https://github.com/login/oauth/access_token',
+                        scopes: {
+                            write: 'Allowed to create or modify data',
+                            delete: 'Allowed to delete data',
+                        },
+                    },
+                },
             },
         },
         requestBodies: {
@@ -144,10 +163,12 @@ const doc = {
                         examples: {
                             User: {
                                 value: {
+                                    githubId: 'any',
+                                    name: 'any',
                                     username: 'JohnDoe',
                                     password: 'Example@123',
                                     email: 'johndoe@example.com',
-                                    role: 'staff',
+                                    role: 'employee',
                                 },
                             },
                         },
